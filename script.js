@@ -66,6 +66,34 @@ const thirdRow = [
   "Enter",
 ];
 
+const fourthRow = [
+  "Shift",
+  "я",
+  "ч",
+  "с",
+  "м",
+  "и",
+  "т",
+  "ь",
+  "б",
+  "ю",
+  ".",
+  "\u25B2",
+  "Shift",
+];
+
+const fifthRow = [
+  "Ctrl",
+  "Win",
+  "Alt",
+  "",
+  "Alt",
+  "\u25C4",
+  "\u25BC",
+  "\u25B6",
+  "Ctrl",
+];
+
 function createButton(arr) {
   for (let i = 0; i < arr.length; i++) {
     let button = document.createElement("div");
@@ -95,3 +123,31 @@ function createButton3(arr) {
   }
 }
 createButton3(thirdRow);
+
+function createButton4(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    let button = document.createElement("div");
+    button.classList.add("button");
+    button.textContent = `${arr[i]}`;
+    keyboardRow4.append(button);
+  }
+}
+createButton4(fourthRow);
+
+function createButton5(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    let button = document.createElement("div");
+    button.classList.add("button");
+    button.textContent = `${arr[i]}`;
+    keyboardRow5.append(button);
+  }
+}
+createButton5(fifthRow);
+
+const info = document.createElement("h4");
+info.textContent = "Клавиатура создана в операционной системе Windows";
+keyboard.after(info);
+
+const info2 = document.createElement("h4");
+info2.textContent = "Для переключения языка комбинация: левыe ctrl + alt";
+keyboard.after(info2);

@@ -12,6 +12,10 @@ h1 {
   /* padding-top: 10px; */
   color: rgb(0, 133, 86);
 }
+h4 {
+  text-align: center;
+  margin: 10px;
+}
 
 textarea {
   width: 900px;
@@ -25,6 +29,8 @@ textarea {
   background-color: rgba(182, 182, 182, 0.914);
   display: flex;
   flex-wrap: wrap;
+  border: 2px solid black;
+  border-radius: 5px;
   /* justify-content: space-evenly; */
   /* gap: 5px; */
 }
@@ -87,4 +93,22 @@ body > main > div > div:nth-child(3) > div:nth-child(1) {
 body > main > div > div:nth-child(3) > div:nth-child(13) {
   background-color: rgba(24, 24, 24, 0.914);
   flex-grow: 0.23;
+}
+body > main > div > div:nth-child(4) > div:nth-child(1) {
+  background-color: rgba(24, 24, 24, 0.914);
+  flex-grow: 0.3;
+}
+body > main > div > div:nth-child(4) > div:nth-child(12) {
+  background-color: rgba(24, 24, 24, 0.914);
+}
+body > main > div > div:nth-child(4) > div:nth-child(13) {
+  background-color: rgba(24, 24, 24, 0.914);
+  flex-grow: 0.23;
+}
+body > main > div > div:nth-child(5) > div {
+  background-color: rgba(24, 24, 24, 0.914);
+}
+body > main > div > div:nth-child(5) > div:nth-child(4) {
+  background-color: rgba(108, 107, 107, 0.914);
+  flex-grow: 0.86;
 }
