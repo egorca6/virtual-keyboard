@@ -1,0 +1,90 @@
+.main {
+  width: 100vw;
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  /* padding-top: 10px; */
+  color: rgb(0, 133, 86);
+}
+
+textarea {
+  width: 900px;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
+.keyboard {
+  width: 750px;
+  height: 250px;
+  background-color: rgba(182, 182, 182, 0.914);
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-evenly; */
+  /* gap: 5px; */
+}
+.keyboard-row {
+  width: 750px;
+  height: 50px;
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-around;
+  /* align-items: center; */
+  /* background-color: blueviolet; */
+  /* gap: 5px; */
+  column-gap: 5px;
+}
+
+.button {
+  /* margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px; */
+  border-radius: 5%;
+  margin-top: 5px;
+  /* width: calc((100% / 14) - 15px);
+  height: calc((100% / 5) - 15px); */
+  /* width: 41px; */
+  width: 5%;
+  height: 35px;
+  background-color: rgba(108, 107, 107, 0.914);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* text-align: center; */
+}
+.button:first-child {
+  margin-left: 5px;
+}
+/* .button:last-child {
+  flex-grow: 1;
+  background-color: rgba(24, 24, 24, 0.914);
+} */
+
+body > main > div > div:nth-child(1) > div:nth-child(14) {
+  flex-grow: 0.5;
+  background-color: rgba(24, 24, 24, 0.914);
+  /* margin-right: 55px; */
+  margin-right: 5px;
+}
+body > main > div > div:nth-child(2) > div:nth-child(1) {
+  flex-grow: 0.2;
+  background-color: rgba(24, 24, 24, 0.914);
+}
+body > main > div > div:nth-child(2) > div:nth-child(15) {
+  margin-right: 5px;
+}
+body > main > div > div:nth-child(3) > div:nth-child(1) {
+  background-color: rgba(24, 24, 24, 0.914);
+  flex-grow: 0.3;
+}
+
+body > main > div > div:nth-child(3) > div:nth-child(13) {
+  background-color: rgba(24, 24, 24, 0.914);
+  flex-grow: 0.23;
+}
