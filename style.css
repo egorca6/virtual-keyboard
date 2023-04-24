@@ -63,7 +63,10 @@ textarea {
   justify-content: center;
   align-items: center;
   /* text-align: center; */
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
 }
+
 .button:first-child {
   margin-left: 5px;
 }
@@ -111,4 +114,13 @@ body > main > div > div:nth-child(5) > div {
 body > main > div > div:nth-child(5) > div:nth-child(4) {
   background-color: rgba(108, 107, 107, 0.914);
   flex-grow: 0.86;
+}
+
+.keyboard .keyboard-row .button:hover {
+  background-color: greenyellow;
+  /* border-radius: 50%; */
+}
+.keyboard .keyboard-row .button:active {
+  background-color: aquamarine;
+  border-radius: 100%;
 }

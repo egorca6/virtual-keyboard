@@ -151,3 +151,15 @@ keyboard.after(info);
 const info2 = document.createElement("h4");
 info2.textContent = "Для переключения языка комбинация: левыe ctrl + alt";
 keyboard.after(info2);
+
+document.addEventListener("keydown", (event) => {
+  text.textContent += event.key;
+  if (event.code == "Backspace") {
+    text.textContent = text.textContent - text.textContent;
+  }
+  // text.innerText = "";
+  // text.innerText += event.key;
+  console.log(event.key);
+  console.log(event.code);
+  // return text.innerText;
+});
