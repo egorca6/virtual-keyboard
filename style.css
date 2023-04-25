@@ -64,7 +64,7 @@ textarea {
   align-items: center;
   /* text-align: center; */
   cursor: pointer;
-  transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
 }
 
 .button:first-child {
@@ -75,16 +75,28 @@ textarea {
   background-color: rgba(24, 24, 24, 0.914);
 } */
 
-body > main > div > div:nth-child(1) > div:nth-child(14) {
+/* body > main > div > div:nth-child(1) > div:nth-child(14) {
   flex-grow: 0.5;
   background-color: rgba(24, 24, 24, 0.914);
-  /* margin-right: 55px; */
+  
+} */
+.black {
+  flex-grow: 0.5;
+  background-color: rgba(24, 24, 24, 0.914);
   margin-right: 5px;
 }
-body > main > div > div:nth-child(2) > div:nth-child(1) {
+.keyboard-row:nth-child(2) .button:nth-child(1) {
   flex-grow: 0.2;
   background-color: rgba(24, 24, 24, 0.914);
 }
+/* .button::content {
+  flex-grow: 0.2;
+  background-color: rgba(24, 24, 24, 0.914);
+} */
+/* body > main > div > div:nth-child(2) > div:nth-child(1) {
+  flex-grow: 0.2;
+  background-color: rgba(24, 24, 24, 0.914);
+} */
 body > main > div > div:nth-child(2) > div:nth-child(15) {
   margin-right: 5px;
 }
@@ -121,6 +133,10 @@ body > main > div > div:nth-child(5) > div:nth-child(4) {
   /* border-radius: 50%; */
 }
 .keyboard .keyboard-row .button:active {
+  background-color: aquamarine;
+  border-radius: 100%;
+}
+.active {
   background-color: aquamarine;
   border-radius: 100%;
 }

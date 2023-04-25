@@ -143,6 +143,25 @@ function createButton5(arr) {
   }
 }
 createButton5(fifthRow);
+document
+  .querySelector("body > main > div > div:nth-child(1) > div:nth-child(14)")
+  .classList.add("black");
+document;
+//   .querySelector("body > main > div > div:nth-child(2) > div:nth-child(1)")
+//   .classList.add("black");
+// document
+//   .querySelector("body > main > div > div:nth-child(3) > div:nth-child(13)")
+//   .classList.add("black");
+// document
+//   .querySelector("body > main > div > div:nth-child(3) > div:nth-child(1)")
+//   .classList.add("black");
+// document
+//   .querySelector("body > main > div > div:nth-child(4) > div:nth-child(1)")
+//   .classList.add("black");
+// document
+//   .querySelector("body > main > div > div:nth-child(5) > div:nth-child(1)")
+//   .classList.add("black");
+// console.log(document.getElementsByClassName("button")[11]);
 
 const info = document.createElement("h4");
 info.textContent = "Клавиатура создана в операционной системе Windows";
@@ -153,13 +172,39 @@ info2.textContent = "Для переключения языка комбинац
 keyboard.after(info2);
 
 document.addEventListener("keydown", (event) => {
-  text.textContent += event.key;
-  if (event.code == "Backspace") {
-    text.textContent = text.textContent - text.textContent;
+  if (event.key == "Backspace") {
+    text.textContent = text.textContent.slice(0, text.textContent.length - 1);
+  } else if (event.key == "Tab") {
+    event.preventDefault();
+    text.textContent += "  ";
+  } else {
+    text.textContent += event.key;
   }
-  // text.innerText = "";
-  // text.innerText += event.key;
-  console.log(event.key);
-  console.log(event.code);
-  // return text.innerText;
+  // button.classList.add("active");
+
+  // document.querySelector("button").classList.add("active");
+  // document.getElementsByClassName("button")[16].classList.add("active");
+  for (let i = 0; i < 64; i++) {
+    if (event.key == document.getElementsByClassName("button")[i].innerText)
+      document.getElementsByClassName("button")[i].classList.add("active");
+    // document.getElementsByClassName("button")[i].style.backgroundColor = "red";
+  }
+
+  // console.log(event.code);
+  // console.log("ИТого = " + text.textContent);
+  // console.log(document.activeElement);
+  console.log("event.key = " + event.key);
+  console.log("event.code = " + event.code);
+  // console.log(event.currentTarget);
 });
+
+document.addEventListener("keyup", (event) => {
+  // for (let i = 0; i < 64; i++) {
+  //   if (event.key == document.getElementsByClassName("button")[i].innerText)
+  //     document.getElementsByClassName("button")[i].classList.remove("active");
+  // }
+  // document.getElementsByClassName("button")[16].classList.remove("active");
+});
+// console.log(document.querySelector("keyboard"));
+// console.log(document.querySelectorALL("body > main > div"));
+// console.log(document.getElementsByClassName("button")[16].innerText);
