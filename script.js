@@ -1,5 +1,4 @@
 let body = document.body;
-// body.classList.add("new");
 const main = document.createElement("main");
 main.classList.add("main");
 body.append(main);
@@ -47,7 +46,7 @@ const secondRow = [
   "з",
   "х",
   "ъ",
-  "/",
+  "\\",
   "Del",
 ];
 const thirdRow = [
@@ -143,25 +142,6 @@ function createButton5(arr) {
   }
 }
 createButton5(fifthRow);
-document
-  .querySelector("body > main > div > div:nth-child(1) > div:nth-child(14)")
-  .classList.add("black");
-document;
-//   .querySelector("body > main > div > div:nth-child(2) > div:nth-child(1)")
-//   .classList.add("black");
-// document
-//   .querySelector("body > main > div > div:nth-child(3) > div:nth-child(13)")
-//   .classList.add("black");
-// document
-//   .querySelector("body > main > div > div:nth-child(3) > div:nth-child(1)")
-//   .classList.add("black");
-// document
-//   .querySelector("body > main > div > div:nth-child(4) > div:nth-child(1)")
-//   .classList.add("black");
-// document
-//   .querySelector("body > main > div > div:nth-child(5) > div:nth-child(1)")
-//   .classList.add("black");
-// console.log(document.getElementsByClassName("button")[11]);
 
 const info = document.createElement("h4");
 info.textContent = "Клавиатура создана в операционной системе Windows";
@@ -170,24 +150,119 @@ keyboard.after(info);
 const info2 = document.createElement("h4");
 info2.textContent = "Для переключения языка комбинация: левыe ctrl + alt";
 keyboard.after(info2);
+const DEL = document.querySelector(
+  "body > main > div > div:nth-child(2) > div:nth-child(15)"
+);
+const ARROW_UP = document.querySelector(
+  "body > main > div > div:nth-child(4) > div:nth-child(12)"
+);
+const ARROW_LEFT = document.querySelector(
+  "body > main > div > div:nth-child(5) > div:nth-child(6)"
+);
+const ARROW_DOWN = document.querySelector(
+  "body > main > div > div:nth-child(5) > div:nth-child(7)"
+);
+const ARROW_RIGHT = document.querySelector(
+  "body > main > div > div:nth-child(5) > div:nth-child(8)"
+);
+
+const CTR_LEFT = document.querySelector(
+  "body > main > div > div:nth-child(5) > div:nth-child(1)"
+);
+const CTR_RIGHT = document.querySelector(
+  "body > main > div > div:nth-child(5) > div:nth-child(9)"
+);
+const SPACE = document.querySelector(
+  "body > main > div > div:nth-child(5) > div:nth-child(4)"
+);
+const ALT_LEFT = document.querySelector(
+  "body > main > div > div:nth-child(5) > div:nth-child(3)"
+);
+const ALT_RIGHT = document.querySelector(
+  "body > main > div > div:nth-child(5) > div:nth-child(5)"
+);
+const WIN = document.querySelector(
+  "body > main > div > div:nth-child(5) > div:nth-child(2)"
+);
+const SHIFT_LEFT = document.querySelector(
+  "body > main > div > div:nth-child(4) > div:nth-child(1)"
+);
+const SHIFT_RIGHT = document.querySelector(
+  "body > main > div > div:nth-child(4) > div:nth-child(13)"
+);
+const BACKSPACE = document.querySelector(
+  "body > main > div > div:nth-child(1) > div:nth-child(14)"
+);
+const TAB = document.querySelector(
+  "body > main > div > div:nth-child(2) > div:nth-child(1)"
+);
+const ENTER = document.querySelector(
+  "body > main > div > div:nth-child(3) > div:nth-child(13)"
+);
+const CAPS = document.querySelector(
+  "body > main > div > div:nth-child(3) > div:nth-child(1)"
+);
 
 document.addEventListener("keydown", (event) => {
   if (event.key == "Backspace") {
     text.textContent = text.textContent.slice(0, text.textContent.length - 1);
+    BACKSPACE.classList.add("active");
   } else if (event.key == "Tab") {
     event.preventDefault();
     text.textContent += "  ";
+    TAB.classList.add("active");
+  } else if (event.key == "Delete") {
+    event.preventDefault();
+    DEL.classList.add("active");
+  } else if (event.key == "ArrowUp") {
+    event.preventDefault();
+    ARROW_UP.classList.add("active");
+    text.textContent += "\u25B2";
+  } else if (event.key == "ArrowLeft") {
+    event.preventDefault();
+    ARROW_LEFT.classList.add("active");
+    text.textContent += "\u25C4";
+  } else if (event.key == "ArrowRight") {
+    event.preventDefault();
+    ARROW_RIGHT.classList.add("active");
+    text.textContent += "\u25B6";
+  } else if (event.key == "ArrowDown") {
+    event.preventDefault();
+    ARROW_DOWN.classList.add("active");
+    text.textContent += "\u25BC";
+  } else if (event.code == "ControlLeft") {
+    event.preventDefault();
+    CTR_LEFT.classList.add("active");
+  } else if (event.code == "ControlRight") {
+    event.preventDefault();
+    CTR_RIGHT.classList.add("active");
+  } else if (event.code == "Space") {
+    text.textContent += " ";
+    SPACE.classList.add("active");
+  } else if (event.code == "AltLeft") {
+    event.preventDefault();
+    ALT_LEFT.classList.add("active");
+  } else if (event.code == "AltRight") {
+    event.preventDefault();
+    ALT_RIGHT.classList.add("active");
+  } else if (event.code == "MetaLeft") {
+    WIN.classList.add("active");
+  } else if (event.code == "ShiftLeft") {
+    SHIFT_LEFT.classList.add("active");
+  } else if (event.code == "ShiftRight") {
+    SHIFT_RIGHT.classList.add("active");
+  } else if (event.code == "Enter") {
+    event.preventDefault();
+    ENTER.classList.add("active");
+  } else if (event.code == "CapsLock") {
+    event.preventDefault();
+    CAPS.classList.add("active");
   } else {
     text.textContent += event.key;
-  }
-  // button.classList.add("active");
-
-  // document.querySelector("button").classList.add("active");
-  // document.getElementsByClassName("button")[16].classList.add("active");
-  for (let i = 0; i < 64; i++) {
-    if (event.key == document.getElementsByClassName("button")[i].innerText)
-      document.getElementsByClassName("button")[i].classList.add("active");
-    // document.getElementsByClassName("button")[i].style.backgroundColor = "red";
+    for (let i = 0; i < 64; i++) {
+      if (event.key == document.getElementsByClassName("button")[i].innerText)
+        document.getElementsByClassName("button")[i].classList.add("active");
+    }
   }
 
   // console.log(event.code);
@@ -195,16 +270,25 @@ document.addEventListener("keydown", (event) => {
   // console.log(document.activeElement);
   console.log("event.key = " + event.key);
   console.log("event.code = " + event.code);
-  // console.log(event.currentTarget);
 });
 
 document.addEventListener("keyup", (event) => {
-  // for (let i = 0; i < 64; i++) {
-  //   if (event.key == document.getElementsByClassName("button")[i].innerText)
-  //     document.getElementsByClassName("button")[i].classList.remove("active");
-  // }
-  // document.getElementsByClassName("button")[16].classList.remove("active");
+  for (let i = 0; i < 64; i++) {
+    if (event.key == document.getElementsByClassName("button")[i].innerText)
+      document.getElementsByClassName("button")[i].classList.remove("active");
+  }
+  DEL.classList.remove("active");
+  ARROW_UP.classList.remove("active");
+  ARROW_LEFT.classList.remove("active");
+  ARROW_DOWN.classList.remove("active");
+  ARROW_RIGHT.classList.remove("active");
+  CTR_LEFT.classList.remove("active");
+  CTR_RIGHT.classList.remove("active");
+  SPACE.classList.remove("active");
+  WIN.classList.remove("active");
+  SHIFT_LEFT.classList.remove("active");
+  SHIFT_RIGHT.classList.remove("active");
+  ALT_LEFT.classList.remove("active");
+  ALT_RIGHT.classList.remove("active");
+  BACKSPACE.classList.remove("active");
 });
-// console.log(document.querySelector("keyboard"));
-// console.log(document.querySelectorALL("body > main > div"));
-// console.log(document.getElementsByClassName("button")[16].innerText);
