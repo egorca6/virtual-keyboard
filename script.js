@@ -31,9 +31,51 @@ const keyboardRow5 = document.createElement('div');
 keyboardRow5.classList.add('keyboard-row');
 keyboard.append(keyboardRow5);
 
-const firstRow = ['ё', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace'];
-const secondRow = [
-  'Tab',
+const english = ['`', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace', 'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del', 'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', ' Enter', 'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '\u25B2', 'Shift', 'Ctrl', 'Win', 'Alt', '', 'Alt',
+  '', '\u25C4', '\u25BC', '\u25B6', 'Ctrl'];
+
+const englishShift = {
+  0: '~',
+  1: '!',
+  2: '@',
+  3: '#',
+  4: '$',
+  5: '%',
+  6: '^',
+  7: '&',
+  8: '*',
+  9: '(',
+  10: ')',
+  11: '_',
+  12: '+',
+  25: '{',
+  26: '}',
+  27: '|',
+  39: ':',
+  40: '"',
+  50: '<',
+  51: '>',
+  52: '?',
+};
+
+const russianShift = {
+  1: '!',
+  2: '"',
+  3: '№',
+  4: ';',
+  5: '%',
+  6: ':',
+  7: '?',
+  8: '*',
+  9: '(',
+  10: ')',
+  11: '_',
+  12: '+',
+  27: '/',
+  52: ',',
+};
+
+const russian = ['ё', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace', 'Tab',
   'й',
   'ц',
   'у',
@@ -48,8 +90,6 @@ const secondRow = [
   'ъ',
   '\\',
   'Del',
-];
-const thirdRow = [
   'CapsLock',
   'ф',
   'ы',
@@ -63,9 +103,6 @@ const thirdRow = [
   'ж',
   'э',
   'Enter',
-];
-
-const fourthRow = [
   'Shift',
   'я',
   'ч',
@@ -79,9 +116,6 @@ const fourthRow = [
   '.',
   '\u25B2',
   'Shift',
-];
-
-const fifthRow = [
   'Ctrl',
   'Win',
   'Alt',
@@ -90,65 +124,64 @@ const fifthRow = [
   '\u25C4',
   '\u25BC',
   '\u25B6',
-  'Ctrl',
-];
+  'Ctrl'];
 
 function createButton(arr) {
-  for (let i = 0; i < arr.length; i += 1) {
+  for (let i = 0; i < 14; i += 1) {
     const button = document.createElement('div');
     button.classList.add('button');
     button.textContent = `${arr[i]}`;
     keyboardRow1.append(button);
   }
 }
-createButton(firstRow);
+createButton(russian);
 
 function createButton2(arr) {
-  for (let i = 0; i < arr.length; i += 1) {
+  for (let i = 14; i < 29; i += 1) {
     const button = document.createElement('div');
     button.classList.add('button');
     button.textContent = `${arr[i]}`;
     keyboardRow2.append(button);
   }
 }
-createButton2(secondRow);
+createButton2(russian);
 
 function createButton3(arr) {
-  for (let i = 0; i < arr.length; i += 1) {
+  for (let i = 29; i < 42; i += 1) {
     const button = document.createElement('div');
     button.classList.add('button');
     button.textContent = `${arr[i]}`;
     keyboardRow3.append(button);
   }
 }
-createButton3(thirdRow);
+createButton3(russian);
 
 function createButton4(arr) {
-  for (let i = 0; i < arr.length; i += 1) {
+  for (let i = 42; i < 55; i += 1) {
     const button = document.createElement('div');
     button.classList.add('button');
     button.textContent = `${arr[i]}`;
     keyboardRow4.append(button);
   }
 }
-createButton4(fourthRow);
+createButton4(russian);
 
 function createButton5(arr) {
-  for (let i = 0; i < arr.length; i += 1) {
+  for (let i = 55; i < arr.length; i += 1) {
     const button = document.createElement('div');
     button.classList.add('button');
     button.textContent = `${arr[i]}`;
     keyboardRow5.append(button);
   }
 }
-createButton5(fifthRow);
+createButton5(russian);
 
 const info = document.createElement('h4');
 info.textContent = 'Клавиатура создана в операционной системе Windows';
 keyboard.after(info);
 
 const info2 = document.createElement('h4');
-info2.textContent = 'Для переключения языка комбинация: левыe ctrl + alt';
+info2.textContent = 'Для переключения языка комбинация: левыe shift + alt';
 keyboard.after(info2);
 const DEL = document.querySelector(
   'body > main > div > div:nth-child(2) > div:nth-child(15)',
@@ -249,14 +282,36 @@ document.addEventListener('keydown', (event) => {
     WIN.classList.add('active');
   } else if (event.code === 'ShiftLeft') {
     SHIFT_LEFT.classList.add('active');
+    for (let i = 0; i < 52; i += 1) {
+      if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 51)) {
+        document.getElementsByClassName('button')[i].innerText = document.getElementsByClassName('button')[i].innerText.toUpperCase();
+      }
+    }
   } else if (event.code === 'ShiftRight') {
     SHIFT_RIGHT.classList.add('active');
+    for (let i = 0; i < 52; i += 1) {
+      if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 51)) {
+        document.getElementsByClassName('button')[i].innerText = document.getElementsByClassName('button')[i].innerText.toUpperCase();
+      }
+    }
   } else if (event.code === 'Enter') {
     event.preventDefault();
     ENTER.classList.add('active');
   } else if (event.code === 'CapsLock') {
-    event.preventDefault();
     CAPS.classList.add('active');
+    if (event.getModifierState('CapsLock')) {
+      for (let i = 0; i < 52; i += 1) {
+        if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 51)) {
+          document.getElementsByClassName('button')[i].innerText = document.getElementsByClassName('button')[i].innerText.toUpperCase();
+        }
+      }
+    } else {
+      for (let i = 0; i < 52; i += 1) {
+        if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 51)) {
+          document.getElementsByClassName('button')[i].innerText = document.getElementsByClassName('button')[i].innerText.toLowerCase();
+        }
+      }
+    }
   } else {
     text.textContent += event.key;
     for (let i = 0; i < 64; i += 1) {
@@ -265,15 +320,61 @@ document.addEventListener('keydown', (event) => {
       }
     }
   }
+  console.log(`event.key = ${event.key}`);
+  console.log(`event.code = ${event.code}`);
+});
 
-  // console.log(`event.key = ${event.key}`);
-  // console.log(`event.code = ${event.code}`);
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Shift') {
+    if (document.getElementsByClassName('button')[15].innerText === 'q' || document.getElementsByClassName('button')[15].innerText === 'Q') {
+      for (let i = 0; i < 54; i += 1) {
+        if (i <= 12 || (i >= 25 && i <= 27) || (i >= 39 && i <= 40) || (i >= 50 && i <= 52)) {
+          document.getElementsByClassName('button')[i].innerText = englishShift[i];
+        }
+      }
+    } else {
+      for (let i = 1; i < 53; i += 1) {
+        if (i <= 12 || (i === 27) || (i === 52)) {
+          document.getElementsByClassName('button')[i].innerText = russianShift[i];
+        }
+      }
+    }
+  }
 });
 
 document.addEventListener('keyup', (event) => {
   for (let i = 0; i < 64; i += 1) {
     if (event.key === document.getElementsByClassName('button')[i].innerText) {
       document.getElementsByClassName('button')[i].classList.remove('active');
+    }
+  }
+  if (event.code === 'ShiftLeft') {
+    for (let i = 0; i < 52; i += 1) {
+      if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 51)) {
+        document.getElementsByClassName('button')[i].innerText = document.getElementsByClassName('button')[i].innerText.toLowerCase();
+      }
+    }
+  }
+  if (event.code === 'ShiftRight') {
+    for (let i = 0; i < 52; i += 1) {
+      if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 51)) {
+        document.getElementsByClassName('button')[i].innerText = document.getElementsByClassName('button')[i].innerText.toLowerCase();
+      }
+    }
+  }
+  if (event.key === 'Shift') {
+    if (document.getElementsByClassName('button')[15].innerText === 'q' || document.getElementsByClassName('button')[15].innerText === 'Q') {
+      for (let i = 0; i < 54; i += 1) {
+        if (i <= 12 || (i >= 25 && i <= 27) || (i >= 39 && i <= 40) || (i >= 50 && i <= 52)) {
+          document.getElementsByClassName('button')[i].innerText = english[i];
+        }
+      }
+    } else {
+      for (let i = 0; i < 53; i += 1) {
+        if (i <= 12 || (i === 27) || (i === 52)) {
+          document.getElementsByClassName('button')[i].innerText = russian[i];
+        }
+      }
     }
   }
   DEL.classList.remove('active');
@@ -291,3 +392,27 @@ document.addEventListener('keyup', (event) => {
   ALT_RIGHT.classList.remove('active');
   BACKSPACE.classList.remove('active');
 });
+
+document.addEventListener('keydown', (event) => {
+  if (event.altKey && event.shiftKey) {
+    if (document.getElementsByClassName('button')[15].innerText === 'й' || document.getElementsByClassName('button')[15].innerText === 'Й') {
+      for (let i = 0; i < 54; i += 1) {
+        if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 54)) {
+          document.getElementsByClassName('button')[i].innerText = english[i];
+        }
+      }
+    } else {
+      for (let i = 0; i < 54; i += 1) {
+        if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 54)) {
+          document.getElementsByClassName('button')[i].innerText = russian[i];
+        }
+      }
+    }
+  }
+});
+// console.log(window.localStorage.getItem('Localelanguage'));
+// window.addEventListener('beforeunload', (e) => {
+//   e.preventDefault();
+//   document.getElementsByClassName('button')[0].innerText = 'G';
+//   e.returnValue = '';
+// });
