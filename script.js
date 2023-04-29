@@ -236,33 +236,57 @@ const CAPS = document.querySelector(
   'body > main > div > div:nth-child(3) > div:nth-child(1)',
 );
 
-document.addEventListener('keydown', (event) => {
+function writeTextKeydown(event) {
+  const cursorPosition = text.selectionStart;
   if (event.key === 'Backspace') {
-    text.textContent = text.textContent.slice(0, text.textContent.length - 1);
     BACKSPACE.classList.add('active');
+    if (text.selectionStart === 0) {
+      text.textContent = text.textContent.slice(0, text.textContent.length - 1);
+      event.preventDefault();
+    } else {
+      text.textContent = text.textContent.slice(0, cursorPosition - 1)
+      + text.textContent.slice(cursorPosition);
+      text.selectionStart = cursorPosition - 1;
+      text.selectionEnd = cursorPosition - 1;
+      event.preventDefault();
+    }
   } else if (event.key === 'Tab') {
+    text.textContent = `${text.textContent.slice(0, cursorPosition)}  ${text.textContent.slice(cursorPosition)}`;
+    text.selectionStart = cursorPosition + 2;
+    text.selectionEnd = cursorPosition + 2;
     event.preventDefault();
-    text.textContent += '  ';
     TAB.classList.add('active');
   } else if (event.key === 'Delete') {
+    text.textContent = text.textContent.slice(0, cursorPosition)
+    + text.textContent.slice(cursorPosition + 1);
+    text.selectionStart = cursorPosition;
+    text.selectionEnd = cursorPosition;
     event.preventDefault();
     DEL.classList.add('active');
   } else if (event.key === 'ArrowUp') {
-    event.preventDefault();
     ARROW_UP.classList.add('active');
-    text.textContent += '\u25B2';
+    text.textContent = `${text.textContent.slice(0, cursorPosition)}\u25B2${text.textContent.slice(cursorPosition)}`;
+    text.selectionStart = cursorPosition + 1;
+    text.selectionEnd = cursorPosition + 1;
+    event.preventDefault();
   } else if (event.key === 'ArrowLeft') {
+    text.textContent = `${text.textContent.slice(0, cursorPosition)}\u25C4${text.textContent.slice(cursorPosition)}`;
+    text.selectionStart = cursorPosition + 1;
+    text.selectionEnd = cursorPosition + 1;
     event.preventDefault();
     ARROW_LEFT.classList.add('active');
-    text.textContent += '\u25C4';
   } else if (event.key === 'ArrowRight') {
+    text.textContent = `${text.textContent.slice(0, cursorPosition)}\u25B6${text.textContent.slice(cursorPosition)}`;
+    text.selectionStart = cursorPosition + 1;
+    text.selectionEnd = cursorPosition + 1;
     event.preventDefault();
     ARROW_RIGHT.classList.add('active');
-    text.textContent += '\u25B6';
   } else if (event.key === 'ArrowDown') {
+    text.textContent = `${text.textContent.slice(0, cursorPosition)}\u25BC${text.textContent.slice(cursorPosition)}`;
+    text.selectionStart = cursorPosition + 1;
+    text.selectionEnd = cursorPosition + 1;
     event.preventDefault();
     ARROW_DOWN.classList.add('active');
-    text.textContent += '\u25BC';
   } else if (event.code === 'ControlLeft') {
     event.preventDefault();
     CTR_LEFT.classList.add('active');
@@ -270,8 +294,11 @@ document.addEventListener('keydown', (event) => {
     event.preventDefault();
     CTR_RIGHT.classList.add('active');
   } else if (event.code === 'Space') {
-    text.textContent += ' ';
+    text.textContent = `${text.textContent.slice(0, cursorPosition)} ${text.textContent.slice(cursorPosition)}`;
+    text.selectionStart = cursorPosition + 1;
+    text.selectionEnd = cursorPosition + 1;
     SPACE.classList.add('active');
+    event.preventDefault();
   } else if (event.code === 'AltLeft') {
     event.preventDefault();
     ALT_LEFT.classList.add('active');
@@ -295,10 +322,13 @@ document.addEventListener('keydown', (event) => {
       }
     }
   } else if (event.code === 'Enter') {
+    text.textContent = `${text.textContent.slice(0, cursorPosition)}\n${text.textContent.slice(cursorPosition)}`;
+    text.selectionStart = cursorPosition + 1;
+    text.selectionEnd = cursorPosition + 1;
     event.preventDefault();
     ENTER.classList.add('active');
   } else if (event.code === 'CapsLock') {
-    CAPS.classList.add('active');
+    CAPS.classList.toggle('active');
     if (event.getModifierState('CapsLock')) {
       for (let i = 0; i < 52; i += 1) {
         if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 51)) {
@@ -313,18 +343,100 @@ document.addEventListener('keydown', (event) => {
       }
     }
   } else {
-    text.textContent += event.key;
+    text.textContent = text.textContent.slice(0, cursorPosition) + event.key
+    + text.textContent.slice(cursorPosition);
+    text.selectionStart = cursorPosition + 1;
+    text.selectionEnd = cursorPosition + 1;
+    event.preventDefault();
     for (let i = 0; i < 64; i += 1) {
       if (event.key === document.getElementsByClassName('button')[i].innerText) {
         document.getElementsByClassName('button')[i].classList.add('active');
       }
     }
   }
-  console.log(`event.key = ${event.key}`);
-  console.log(`event.code = ${event.code}`);
-});
+}
+
+function writeTextClick(event) {
+  const cursorPosition = text.selectionStart;
+  if (event.target.textContent === 'Backspace') {
+    text.textContent = text.textContent.slice(0, cursorPosition - 1)
+    + text.textContent.slice(cursorPosition);
+    text.selectionStart = cursorPosition - 1;
+    text.selectionEnd = cursorPosition - 1;
+  } else if (event.target.textContent === 'Tab') {
+    text.textContent = `${text.textContent.slice(0, cursorPosition)}  ${text.textContent.slice(cursorPosition)}`;
+    text.selectionStart = cursorPosition + 2;
+    text.selectionEnd = cursorPosition + 2;
+    event.preventDefault();
+  } else if (event.target.textContent === 'Del') {
+    text.textContent = text.textContent.slice(0, cursorPosition)
+    + text.textContent.slice(cursorPosition + 1);
+    text.selectionStart = cursorPosition;
+    text.selectionEnd = cursorPosition;
+    event.preventDefault();
+  } else if (event.target.textContent === 'Ctrl') {
+    event.preventDefault();
+  } else if (event.target.textContent === '') {
+    text.textContent = `${text.textContent.slice(0, cursorPosition)} ${text.textContent.slice(cursorPosition)}`;
+    text.selectionStart = cursorPosition + 1;
+    text.selectionEnd = cursorPosition + 1;
+  } else if (event.target.textContent === 'Alt') {
+    event.preventDefault();
+  } else if (event.target.textContent === 'Win') {
+    event.preventDefault();
+  } else if (event.target.textContent === 'Shift') {
+    for (let i = 0; i < 52; i += 1) {
+      if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 51)) {
+        document.getElementsByClassName('button')[i].innerText = document.getElementsByClassName('button')[i].innerText.toUpperCase();
+      }
+    }
+    if (document.getElementsByClassName('button')[15].innerText === 'q' || document.getElementsByClassName('button')[15].innerText === 'Q') {
+      for (let i = 0; i < 54; i += 1) {
+        if (i <= 12 || (i >= 25 && i <= 27) || (i >= 39 && i <= 40) || (i >= 50 && i <= 52)) {
+          document.getElementsByClassName('button')[i].innerText = englishShift[i];
+        }
+      }
+    } else {
+      for (let i = 1; i < 53; i += 1) {
+        if (i <= 12 || (i === 27) || (i === 52)) {
+          document.getElementsByClassName('button')[i].innerText = russianShift[i];
+        }
+      }
+    }
+  } else if (event.target.textContent === 'Enter') {
+    text.textContent = `${text.textContent.slice(0, cursorPosition)}\n${text.textContent.slice(cursorPosition)}`;
+    text.selectionStart = cursorPosition + 1;
+    text.selectionEnd = cursorPosition + 1;
+  } else if (event.target.textContent === 'CapsLock') {
+    if (document.getElementsByClassName('button')[15].innerText === document.getElementsByClassName('button')[15].innerText.toLowerCase()) {
+      for (let i = 0; i < 52; i += 1) {
+        if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 51)) {
+          document.getElementsByClassName('button')[i].innerText = document.getElementsByClassName('button')[i].innerText.toUpperCase();
+        }
+      }
+    } else {
+      for (let i = 0; i < 52; i += 1) {
+        if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 51)) {
+          document.getElementsByClassName('button')[i].innerText = document.getElementsByClassName('button')[i].innerText.toLowerCase();
+        }
+      }
+    }
+  } else {
+    text.textContent = text.textContent.slice(0, cursorPosition) + event.target.textContent
+    + text.textContent.slice(cursorPosition);
+    text.selectionStart = cursorPosition + 1;
+    text.selectionEnd = cursorPosition + 1;
+    event.preventDefault();
+    for (let i = 0; i < 64; i += 1) {
+      if (event.target === document.getElementsByClassName('button')[i].innerText) {
+        document.getElementsByClassName('button')[i].classList.add('active');
+      }
+    }
+  }
+}
 
 document.addEventListener('keydown', (event) => {
+  writeTextKeydown(event);
   if (event.key === 'Shift') {
     if (document.getElementsByClassName('button')[15].innerText === 'q' || document.getElementsByClassName('button')[15].innerText === 'Q') {
       for (let i = 0; i < 54; i += 1) {
@@ -336,6 +448,23 @@ document.addEventListener('keydown', (event) => {
       for (let i = 1; i < 53; i += 1) {
         if (i <= 12 || (i === 27) || (i === 52)) {
           document.getElementsByClassName('button')[i].innerText = russianShift[i];
+        }
+      }
+    }
+  }
+  if (event.altKey && event.shiftKey) {
+    if (document.getElementsByClassName('button')[15].innerText === 'й' || document.getElementsByClassName('button')[15].innerText === 'Й') {
+      for (let i = 0; i < 54; i += 1) {
+        if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 54)) {
+          document.getElementsByClassName('button')[i].innerText = english[i];
+          sessionStorage.setItem('lang', 'english');
+        }
+      }
+    } else {
+      for (let i = 0; i < 54; i += 1) {
+        if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 54)) {
+          document.getElementsByClassName('button')[i].innerText = russian[i];
+          sessionStorage.setItem('lang', 'russian');
         }
       }
     }
@@ -386,33 +515,55 @@ document.addEventListener('keyup', (event) => {
   CTR_RIGHT.classList.remove('active');
   SPACE.classList.remove('active');
   WIN.classList.remove('active');
-  SHIFT_LEFT.classList.remove('active');
-  SHIFT_RIGHT.classList.remove('active');
   ALT_LEFT.classList.remove('active');
   ALT_RIGHT.classList.remove('active');
   BACKSPACE.classList.remove('active');
+  CAPS.classList.remove('active');
 });
 
-document.addEventListener('keydown', (event) => {
-  if (event.altKey && event.shiftKey) {
-    if (document.getElementsByClassName('button')[15].innerText === 'й' || document.getElementsByClassName('button')[15].innerText === 'Й') {
+const keyboardVirtual = document.querySelectorAll('.button');
+
+keyboardVirtual.forEach((el) => el.addEventListener('mousedown', (event) => {
+  writeTextClick(event);
+}));
+
+CAPS.addEventListener('click', () => {
+  CAPS.classList.toggle('active');
+});
+
+keyboardVirtual.forEach((el) => el.addEventListener('mouseup', (event) => {
+  if (event.target.textContent === 'Shift') {
+    if (document.getElementsByClassName('button')[15].innerText === 'q' || document.getElementsByClassName('button')[15].innerText === 'Q') {
       for (let i = 0; i < 54; i += 1) {
-        if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 54)) {
+        if (i <= 12 || (i >= 25 && i <= 27) || (i >= 39 && i <= 40) || (i >= 50 && i <= 52)) {
           document.getElementsByClassName('button')[i].innerText = english[i];
         }
       }
     } else {
-      for (let i = 0; i < 54; i += 1) {
-        if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 54)) {
+      for (let i = 1; i < 53; i += 1) {
+        if (i <= 12 || (i === 27) || (i === 52)) {
           document.getElementsByClassName('button')[i].innerText = russian[i];
         }
       }
     }
+    for (let i = 0; i < 52; i += 1) {
+      if (i === 0 || (i >= 15 && i <= 26) || (i >= 30 && i <= 40) || (i >= 43 && i <= 51)) {
+        document.getElementsByClassName('button')[i].innerText = document.getElementsByClassName('button')[i].innerText.toLowerCase();
+      }
+    }
+  }
+}));
+
+window.addEventListener('load', () => {
+  if (sessionStorage.getItem('lang') === 'english') {
+    for (let i = 0; i < 54; i += 1) {
+      document.getElementsByClassName('button')[i].innerText = english[i];
+    }
+  } else {
+    for (let i = 1; i < 53; i += 1) {
+      if (i <= 12 || (i === 27) || (i === 52)) {
+        document.getElementsByClassName('button')[i].innerText = russian[i];
+      }
+    }
   }
 });
-// console.log(window.localStorage.getItem('Localelanguage'));
-// window.addEventListener('beforeunload', (e) => {
-//   e.preventDefault();
-//   document.getElementsByClassName('button')[0].innerText = 'G';
-//   e.returnValue = '';
-// });
